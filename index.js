@@ -11,8 +11,19 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/:id", (req, res) => {
+  let {
+    params: { id },
+  } = req;
+  let user = Services.getUser(id);
+  res.json({
+    message: `user: ${id}`,
+    users: user,
+  });
+});
+
 app.post("/", (req, res) => {
-  let {body: newUser} = req;
+  let { body: newUser } = req;
   res.status(201).json({
     message: "Usuario creado",
     body: Services.createUser(newUser),
